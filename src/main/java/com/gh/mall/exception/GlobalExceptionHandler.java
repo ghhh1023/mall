@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
         return Result.error();
     }
 
+    //test
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public Result customError(HttpServletRequest request, CustomException e){
