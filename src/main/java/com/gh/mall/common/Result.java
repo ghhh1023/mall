@@ -1,5 +1,6 @@
 package com.gh.mall.common;
 
+// hello
 public class Result<T> {
     private String code;
 
