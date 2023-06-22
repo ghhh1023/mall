@@ -35,4 +35,22 @@ public class UserInfoService {
         }
         return list.get(0);
     }
+
+    /**
+     * reset
+     */
+    public UserInfo resetPassword(String name,String oldPassword,String newPassword){
+        //判断数据库里是否有该用户
+        List<UserInfo> list = userInfoMapper.findByName(name);
+        if(CollectionUtil.isEmpty(list)){
+            throw new CustomException(ResultCode.USER_NOT_EXIST_ERROR);
+        }
+        //判断密码是否正确
+        if(!SecureUtil.md5(oldPassword).equals(list.get(0).getPassword())){
+            throw new CustomException(ResultCode.USER_ACCOUNT_ERROR);
+        }
+        list.get(0).setPassword(SecureUtil.md5(newPassword));
+        userInfoMapper.updateByPrimaryKeySelective(list.get(0));
+        return list.get(0);
+    }
 }

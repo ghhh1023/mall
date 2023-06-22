@@ -33,4 +33,12 @@ public class AccountController {
         session.setMaxInactiveInterval(60*24);
         return Result.success(login);
     }
+
+    /**
+     * reset
+     */
+    @PostMapping("/resetPassword")
+    public Result<UserInfo> resetPassword(@RequestBody UserInfo userInfo, HttpServletRequest request){
+        return Result.success(userInfoService.resetPassword(userInfo.getName(),userInfo.getPassword(),userInfo.getPassword()));
+    }
 }

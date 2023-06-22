@@ -27,7 +27,7 @@
   </sql>
   <select id="findByName" resultType="com.gh.mall.entity.UserInfo">
     select * from user_info where 1=1
-    <if test="name != null and name!='all' and name !=' '">
+    <if test="name != null and name!='all' and name !=''">
       and `name` = #{name}
     </if>
   </select>
