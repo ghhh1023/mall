@@ -1,5 +1,6 @@
 package com.gh.mall.genere;
 
+import cn.hutool.crypto.SecureUtil;
 import org.junit.jupiter.api.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
@@ -24,5 +25,11 @@ class GenerateApplicationTests {
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
+    }
+
+    @Test
+    void md5(){
+        String password = SecureUtil.md5("123456");
+        System.out.println(password);
     }
 }
