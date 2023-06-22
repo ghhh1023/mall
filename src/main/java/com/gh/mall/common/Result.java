@@ -22,6 +22,7 @@ public class Result<T> {
         return result;
     }
 
+    // hello
     public static Result error(){
         Result result = new Result<>();
         result.setCode(ResultCode.ERROR.code);
