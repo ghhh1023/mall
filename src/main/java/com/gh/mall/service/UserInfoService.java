@@ -6,6 +6,8 @@ import com.gh.mall.common.ResultCode;
 import com.gh.mall.entity.UserInfo;
 import com.gh.mall.exception.CustomException;
 import com.gh.mall.mapper.UserInfoMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,5 +36,11 @@ public class UserInfoService {
             throw new CustomException(ResultCode.USER_ACCOUNT_ERROR);
         }
         return list.get(0);
+    }
+
+    public PageInfo<UserInfo> findPage(Integer pageNum, Integer pageSize, String name){
+        PageHelper.startPage(pageNum, pageSize);
+        List<UserInfo> list = userInfoMapper.findByName(name);
+        return PageInfo.of(list);
     }
 }
