@@ -19,6 +19,6 @@ public class AccountController {
         if (StrUtil.isBlank(userInfo.getName()) || StrUtil.isBlank(userInfo.getPassword())){
             throw new CustomException(ResultCode.USER_ACCOUNT_ERROR);
         }
-        return Result.success();
+        return Result.error();
     }
 }
