@@ -4294,3 +4294,35 @@ java.lang.NullPointerException: null
 2023-06-24 00:40:19.155  INFO 3296 --- [http-nio-8787-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-06-24 00:40:19.156  INFO 3296 --- [http-nio-8787-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2023-06-24 00:40:19.654  WARN 3296 --- [http-nio-8787-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [477] milliseconds.
+2023-06-24 02:21:22.894  INFO 31284 --- [main] com.gh.mall.MallApplication              : Starting MallApplication using Java 11.0.2 on LAPTOP-GDG1JV21 with PID 31284 (D:\code\mall\target\classes started by 86180 in D:\code\mall)
+2023-06-24 02:21:22.898  INFO 31284 --- [main] com.gh.mall.MallApplication              : No active profile set, falling back to 1 default profile: "default"
+2023-06-24 02:21:23.544  WARN 31284 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.gh.mall]' package. Please check your configuration.
+2023-06-24 02:21:23.798  INFO 31284 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8787 (http)
+2023-06-24 02:21:23.804  INFO 31284 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-24 02:21:23.805  INFO 31284 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2023-06-24 02:21:23.899  INFO 31284 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-24 02:21:23.899  INFO 31284 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 937 ms
+2023-06-24 02:21:23.953  INFO 31284 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2023-06-24 02:21:24.034  INFO 31284 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2023-06-24 02:21:24.312  WARN 31284 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'cartInfoController': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.gh.mall.service.CartInfoService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup="", name="", description="", authenticationType=CONTAINER, type=java.lang.Object.class, mappedName="")}
+2023-06-24 02:21:24.312  INFO 31284 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closing ...
+2023-06-24 02:21:24.313  INFO 31284 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2023-06-24 02:21:24.315  INFO 31284 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-06-24 02:21:24.326  INFO 31284 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-06-24 02:21:24.342 ERROR 31284 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'com.gh.mall.service.CartInfoService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.gh.mall.service.CartInfoService' in your configuration.
+
