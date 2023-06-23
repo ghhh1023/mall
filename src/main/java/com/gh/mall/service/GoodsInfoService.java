@@ -1,5 +1,6 @@
 package com.gh.mall.service;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.gh.mall.entity.GoodsInfo;
 import com.gh.mall.mapper.GoodsInfoMapper;
 import com.github.pagehelper.PageHelper;
@@ -7,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -28,6 +30,7 @@ public class GoodsInfoService {
      */
 
     public GoodsInfo add(GoodsInfo goodsInfo){
+        convertFileListToFields(goodsInfo);
         goodsInfoMapper.insertSelective(goodsInfo);
         return goodsInfo;
     }
@@ -36,9 +39,20 @@ public class GoodsInfoService {
      * update
      */
     public void update(GoodsInfo goodsInfo){
+        convertFileListToFields(goodsInfo);
         goodsInfoMapper.updateByPrimaryKeySelective(goodsInfo);
     }
 
+    /**
+     * 页面传来的上传文件列表转换成以逗号隔开的id列表
+     * @param goodsInfo
+     */
+    private void convertFileListToFields(GoodsInfo goodsInfo){
+        List<Long> fileList = goodsInfo.getFileList();
+        if(!CollectionUtil.isEmpty(fileList)){
+            goodsInfo.setFieids(fileList.toString());
+        }
+    }
     /**
      * delete
      */

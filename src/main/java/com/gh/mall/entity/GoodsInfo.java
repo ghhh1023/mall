@@ -1,9 +1,6 @@
 package com.gh.mall.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Table(name = "goods_info")
@@ -34,12 +31,16 @@ public class GoodsInfo {
      */
     private String description;
 
+    @Transient
     private String typeName;
 
+    @Transient
     private String userName;
 
+    @Transient
     private List<Long> fileList;
 
+    @Transient
     private String commentStatus;
 
     /**

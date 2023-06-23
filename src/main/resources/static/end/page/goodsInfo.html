@@ -107,6 +107,9 @@
                                             <td>{{obj.hot}}</td>
                                             <td>{{obj.recommend}}</td>
                                             <td>
+                                                <button class="btn btn-primary btn-xs" @click="viewModal(obj)">预览</button>
+                                            </td>
+                                            <td>
                                                 <button class="btn btn-primary btn-xs" v-on:click="init(obj)">编辑</button>
                                                 <button class="btn bg-danger btn-xs" v-on:click="del(obj.id)">删除</button>
                                             </td>
@@ -166,7 +169,9 @@
                         <div class="form-group">
                             <div class="col-sm-3 control-label">所属类别</div>
                             <div class="col-sm-7">
-                                <input type="text" class="form-control" v-model="entity.typeid" placeholder="">
+                                <select class="form-control" v-model="entity.typeid">
+                                    <option v-for="item in typeObjs" :value="item.id">{{item.name}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -198,11 +203,31 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label">上传图片</div>
+                            <div class="col-sm-7">
+                                <input @change="upload" @click="clearFile" multiple="multiple" type="file" ref="file">
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary" v-on:click="save()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">图片预览</span>
+                    <button type="button" class="close" data-dismiss="myModal" @click="cancel">x</button>
+                </div>
+                <div class="modal-body" id="view-img" style="text-align: center">
+
                 </div>
             </div>
         </div>
@@ -244,7 +269,9 @@
             this.user = JSON.parse(localStorage.getItem('user'));
             this.loadTable(1);
             axios.get("/typeInfo/page/all?pageSize=1000").then(res=>{
-
+                if(res.data.code === '0'){
+                    this.typeObjs = res.data.data.list;
+                }
             });
         },
         methods: {
@@ -311,6 +338,42 @@
                 }).catch(function () {
                     console.log("取消成功！");
                 })
+            },
+            upload: function () {
+                let files = this.$refs.file.files;
+                for(let i=0;i<files.length;i++){
+                    let formData = new FormData();
+                    formData.append("file",files[i]);
+                    axios.post('/files/upload',formData,{'Content-Type':'multipart/form-data'}).then(res=>{
+                        if(res.data.code === '0'){
+                            msg('success','上传成功');
+                            this.entity.fileList.push(res.data.data.id);
+                        }else {
+                            msg('error',res.data.msg);
+                        }
+                    })
+                }
+            },
+            clearFile: function () {
+                this.entity.fileList = [];
+            },
+            viewModal: function (data) {
+                axios.get("/goodsInfo/detail/"+data.id).then(res=>{
+                    if(res.data.code==='0'){
+                        let fields = JSON.parse(res.data.data.fieids);
+                        console.log(fields);
+                        $("#view-img").empty();
+                        fields.forEach(item =>{
+                            $("#view-img").append($(`<img id="img-id" src="/files/download/${item}" style="width:400px;margin-bottom:5px">`));
+                        });
+                        $("#myModal").show();
+                    }else {
+                        msg('error',res.data.msg);
+                    }
+                })
+            },
+            cancel:function () {
+                $("#myModal").hide();
             }
         }
     });
