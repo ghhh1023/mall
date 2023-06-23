@@ -5,6 +5,8 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.gh.mall.entity.CartInfo;
 import com.gh.mall.mapper.CartInfoMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
@@ -15,6 +17,7 @@ import java.util.List;
 /**
  * 购物车服务
  */
+@Service
 public class CartInfoService {
 
     @Resource
