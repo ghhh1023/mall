@@ -6,6 +6,8 @@ import cn.hutool.core.date.DateUtil;
 import com.gh.mall.entity.CartInfo;
 import com.gh.mall.entity.GoodsInfo;
 import com.gh.mall.mapper.CartInfoMapper;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
@@ -67,5 +69,10 @@ public class CartInfoService {
             }
         }
         return goodsList;
+    }
+
+    /*删除某用户购物车里的某个商品*/
+    public void deleteGoods(Long useId,Long goodsId){
+        cartInfoMapper.deleteGoods(useId, goodsId);
     }
 }

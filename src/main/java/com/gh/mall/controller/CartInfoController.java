@@ -35,4 +35,13 @@ public class CartInfoController {
         return Result.success(cartInfoService.findAll(userId));
 
     }
+
+    /**
+     * 删除某用户购物车里的某个商品
+     */
+    @DeleteMapping("/goods/{userId}/{goodsId}")
+    public Result deleteGoods(@PathVariable Long useId,@PathVariable Long goodsId){
+        cartInfoService.deleteGoods(useId, goodsId);
+        return Result.success();
+    }
 }
