@@ -44,6 +44,7 @@ function personalPage() {
 function logout() {
     axios.get('/logout').then(res => {
         if (res.data.code === '0') {
+            localStorage.setItem('user',null);
             window.location = '/end/page/login.html';
         } else {
             alert(res.data.msg);

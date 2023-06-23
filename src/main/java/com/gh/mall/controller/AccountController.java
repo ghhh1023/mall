@@ -7,6 +7,8 @@ import com.gh.mall.common.ResultCode;
 import com.gh.mall.entity.UserInfo;
 import com.gh.mall.exception.CustomException;
 import com.gh.mall.service.UserInfoService;
+import com.gh.mall.vo.Reset;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +40,16 @@ public class AccountController {
      * reset
      */
     @PostMapping("/resetPassword")
-    public Result<UserInfo> resetPassword(@RequestBody UserInfo userInfo, HttpServletRequest request){
-        return Result.success(userInfoService.resetPassword(userInfo.getName(),userInfo.getPassword(),userInfo.getPassword()));
+    public Result<UserInfo> resetPassword(@RequestBody Reset userInfo, HttpServletRequest request){
+        return Result.success(userInfoService.resetPassword(userInfo.getName(),userInfo.getPassword(), userInfo.getNewPassword()));
+    }
+
+    /**
+     * logout
+     */
+    @GetMapping("/logout")
+    public Result<UserInfo> logout(HttpServletRequest request){
+        request.getSession().setAttribute(Common.USER_INFO,null);
+        return Result.success();
     }
 }
