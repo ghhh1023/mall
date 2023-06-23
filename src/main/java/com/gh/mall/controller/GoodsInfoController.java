@@ -67,4 +67,15 @@ public class GoodsInfoController {
         return Result.success(goodsInfoService.findById(id));
     }
 
+    /**
+     * 查询推荐商品
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/findRecommendGoods")
+    public Result<PageInfo<GoodsInfo>> findRecommendGoods(@RequestParam(defaultValue = "1") Integer pageNum,
+                                            @RequestParam(defaultValue = "10") Integer pageSize){
+        return Result.success(goodsInfoService.findRecommendGoods(pageNum,pageSize));
+    }
 }
