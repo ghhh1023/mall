@@ -4326,3 +4326,27 @@ Action:
 
 Consider defining a bean of type 'com.gh.mall.service.CartInfoService' in your configuration.
 
+2023-06-24 02:24:40.378  INFO 29840 --- [main] com.gh.mall.MallApplication              : Starting MallApplication using Java 11.0.2 on LAPTOP-GDG1JV21 with PID 29840 (D:\code\mall\target\classes started by 86180 in D:\code\mall)
+2023-06-24 02:24:40.380  INFO 29840 --- [main] com.gh.mall.MallApplication              : No active profile set, falling back to 1 default profile: "default"
+2023-06-24 02:24:40.941  WARN 29840 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.gh.mall]' package. Please check your configuration.
+2023-06-24 02:24:41.211  INFO 29840 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8787 (http)
+2023-06-24 02:24:41.220  INFO 29840 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-24 02:24:41.220  INFO 29840 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2023-06-24 02:24:41.316  INFO 29840 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-24 02:24:41.316  INFO 29840 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 893 ms
+2023-06-24 02:24:41.370  INFO 29840 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2023-06-24 02:24:41.456  INFO 29840 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2023-06-24 02:24:42.122  INFO 29840 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8787 (http) with context path ''
+2023-06-24 02:24:42.131  INFO 29840 --- [main] com.gh.mall.MallApplication              : Started MallApplication in 2.184 seconds (JVM running for 3.203)
+2023-06-24 02:28:41.375  INFO 13384 --- [main] com.gh.mall.MallApplication              : Starting MallApplication using Java 11.0.2 on LAPTOP-GDG1JV21 with PID 13384 (D:\code\mall\target\classes started by 86180 in D:\code\mall)
+2023-06-24 02:28:41.377  INFO 13384 --- [main] com.gh.mall.MallApplication              : No active profile set, falling back to 1 default profile: "default"
+2023-06-24 02:28:41.921  WARN 13384 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.gh.mall]' package. Please check your configuration.
+2023-06-24 02:28:42.176  INFO 13384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8787 (http)
+2023-06-24 02:28:42.182  INFO 13384 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-24 02:28:42.183  INFO 13384 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+2023-06-24 02:28:42.274  INFO 13384 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-24 02:28:42.275  INFO 13384 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 858 ms
+2023-06-24 02:28:42.330  INFO 13384 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2023-06-24 02:28:42.412  INFO 13384 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2023-06-24 02:28:43.077  INFO 13384 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8787 (http) with context path ''
+2023-06-24 02:28:43.086  INFO 13384 --- [main] com.gh.mall.MallApplication              : Started MallApplication in 2.166 seconds (JVM running for 3.173)

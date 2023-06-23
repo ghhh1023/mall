@@ -31,7 +31,7 @@ public class CartInfoService {
         Long goodsId = detailInfo.getGoodsid();
         //先查询购物车里有没有该商品，有就更新数量，没有就添加
         Example example = new Example(CartInfo.class);
-        example.createCriteria().andEqualTo("userId",userId).andEqualTo("goodsId",goodsId);
+        example.createCriteria().andEqualTo("userid",userId).andEqualTo("goodsid",goodsId);
         List<CartInfo> infos = cartInfoMapper.selectByExample(example);
         if(CollectionUtil.isEmpty(infos)){
             //新增
