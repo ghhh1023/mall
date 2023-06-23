@@ -13,6 +13,17 @@ import java.util.List;
 public interface GoodsInfoMapper extends Mapper<GoodsInfo> {
     List<GoodsInfo> findByName(@Param("name") String name,@Param("id") Long id);
 
+    /**
+     * 查询推荐商品
+     * @return
+     */
     @Select("select * from goods_info where recommend = '是'")
     List<GoodsInfo> findRecommendGoods();
+
+    /**
+     * 查询热卖商品
+     * @return
+     */
+    @Select("select * from goods_info order by sales desc")
+    List<GoodsInfo> findHotSalesGoods();
 }

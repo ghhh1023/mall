@@ -77,4 +77,12 @@ public class GoodsInfoService {
         List<GoodsInfo> list = goodsInfoMapper.findRecommendGoods();
         return PageInfo.of(list);
     }
+    /**
+     * 查询热卖商品
+     */
+    public PageInfo<GoodsInfo> findHotSalesGoods(Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<GoodsInfo> list = goodsInfoMapper.findHotSalesGoods();
+        return PageInfo.of(list);
+    }
 }
