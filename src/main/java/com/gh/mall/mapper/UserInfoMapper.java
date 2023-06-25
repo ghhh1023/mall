@@ -12,4 +12,6 @@ public interface UserInfoMapper extends Mapper<UserInfo> {
     List<UserInfo> findByName(@Param("name") String name);
 
     int checkRepeat(@Param("column")String column,@Param("value")String value);
+
+    UserInfo findById(@Param("id") int id);
 }

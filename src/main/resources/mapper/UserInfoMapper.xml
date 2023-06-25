@@ -31,6 +31,11 @@
       and `name` = #{name}
     </if>
   </select>
+
+  <select id="findById" resultType="com.gh.mall.entity.UserInfo">
+    select * from user_info where id = #{id}
+  </select>
+
   <select id="checkRepeat" resultType="java.lang.Integer">
     select count(*) from user_info where  ${column} = #{value}
   </select>

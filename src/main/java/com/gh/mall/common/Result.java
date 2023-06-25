@@ -37,6 +37,13 @@ public class Result<T> {
         return result;
     }
 
+    public static <T> Result<T> error(T data){
+        Result result = new Result<>(data);
+        result.setCode(ResultCode.ERROR.code);
+        result.setMsg(ResultCode.ERROR.msg);
+        return result;
+    }
+
     public Result() {
     }
 

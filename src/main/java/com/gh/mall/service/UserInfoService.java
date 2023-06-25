@@ -9,6 +9,7 @@ import com.gh.mall.exception.CustomException;
 import com.gh.mall.mapper.UserInfoMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -98,5 +99,9 @@ public class UserInfoService {
     public void delete(Long id){
         System.out.println(id);
         userInfoMapper.deleteByPrimaryKey(id);
+    }
+
+    public UserInfo findById(int id){
+        return userInfoMapper.findById(id);
     }
 }
