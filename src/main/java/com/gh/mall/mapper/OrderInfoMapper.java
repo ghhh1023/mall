@@ -14,4 +14,7 @@ public interface OrderInfoMapper extends Mapper<OrderInfo> {
     /*根据订单id查询一条订单数据*/
     @Select("select * from order_info where orderId = #{orderId}")
     List<OrderInfo> findByOrderId(@Param("orderId") String orderId);
+
+    /*根据终端用户id和状态查询订单列表*/
+    List<OrderInfo> findByEndUserId(@Param("userId")Long userId,@Param("state")String state);
 }

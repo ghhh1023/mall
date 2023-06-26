@@ -6,10 +6,8 @@ import com.gh.mall.entity.GoodsInfo;
 import com.gh.mall.entity.OrderInfo;
 import com.gh.mall.exception.CustomException;
 import com.gh.mall.service.OrderInfoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.pagehelper.PageInfo;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,5 +33,16 @@ public class OrderInfoController {
         }
         orderInfo.setState("待付款");
         return Result.success(orderInfoService.add(orderInfo));
+    }
+
+    /**
+     * 查询所有信息（分页）
+     */
+    @GetMapping("/page/front")
+    public Result<PageInfo<OrderInfo>> findFrontPages(@RequestParam(required = false) Long userId,
+                                                      @RequestParam(required = false)String state,
+                                                      @RequestParam(required = false,defaultValue = "1")Integer pageNum,
+                                                      @RequestParam(required = false,defaultValue = "10")Integer pageSize){
+        return Result.success(orderInfoService.findFrontPages(userId,state,pageNum,pageSize));
     }
 }
