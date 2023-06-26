@@ -26,4 +26,7 @@ public interface OrderInfoMapper extends Mapper<OrderInfo> {
     /*更新订单状态*/
     @Update("update order_info set state = #{state} where id = #{id}")
     void updateState(@Param("id")Long id, @Param("state")String state);
+
+    /*删除订单*/
+    void deleteById(Long id);
 }

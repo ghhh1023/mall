@@ -2,6 +2,7 @@ package com.gh.mall.service;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.gh.mall.common.Common;
 import com.gh.mall.common.ResultCode;
 import com.gh.mall.entity.GoodsInfo;
 import com.gh.mall.entity.OrderGoodsRel;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.persistence.Transient;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -152,5 +155,39 @@ public class OrderInfoService {
             userInfoService.update(user);
         }
         orderInfoMapper.updateState(id,state);
+    }
+
+    /**
+     * 分页查询订单列表
+     */
+    public PageInfo<OrderInfo> findPages(Long userId, Integer pageNum, Integer pageSize, HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute(Common.USER_INFO);
+        if(user == null){
+            throw new CustomException("1001","session已失效,请重新登陆");
+        }
+        Integer level = user.getLevel();
+        PageHelper.startPage(pageNum,pageSize);
+        List<OrderInfo> orderInfos;
+        if(1 == level){
+            orderInfos = orderInfoMapper.selectAll();
+        }else if(userId!=null){
+            orderInfos = orderInfoMapper.findByEndUserId(userId,null);
+        }else {
+            orderInfos = new ArrayList<>();
+        }
+        for (OrderInfo orderInfo : orderInfos){
+            packOrder(orderInfo);
+        }
+        return PageInfo.of(orderInfos);
+    }
+
+    /**
+     * 删除订单
+     * @param id
+     */
+    @Transactional
+    public void delete(Long id) {
+        orderInfoMapper.deleteById(id);
+        orderGoodsRelMapper.deleteByOrderId(id);
     }
 }
