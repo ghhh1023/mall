@@ -133,4 +133,24 @@ public class OrderInfoService {
         }
         orderInfo.setGoodsList(goodsInfoList);
     }
+
+    /**
+     * 改变订单状态
+     */
+    public void changeState(Long id,String state){
+        OrderInfo order = orderInfoMapper.findById(id);
+        Long userId = order.getUserid();
+        UserInfo user = userInfoService.findById(userId);
+        if(state.equals("待发货")){
+            //付款校验余额
+            Double account = user.getAccount();
+            Double totalPrice = order.getTotalprice();
+            if(account<totalPrice){
+                throw new CustomException("-1","账户余额不足");
+            }
+            user.setAccount(user.getAccount()-order.getTotalprice());
+            userInfoService.update(user);
+        }
+        orderInfoMapper.updateState(id,state);
+    }
 }

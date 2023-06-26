@@ -45,4 +45,13 @@ public class OrderInfoController {
                                                       @RequestParam(required = false,defaultValue = "10")Integer pageSize){
         return Result.success(orderInfoService.findFrontPages(userId,state,pageNum,pageSize));
     }
+
+    /**
+     * ÐÞ¸Ä¶©µ¥×´Ì¬
+     */
+    @PostMapping("/state/{id}/{state}")
+    public Result state(@PathVariable Long id,@PathVariable String state){
+        orderInfoService.changeState(id, state);
+        return Result.success();
+    }
 }
