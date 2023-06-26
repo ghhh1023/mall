@@ -11,10 +11,14 @@ import java.util.List;
 @Repository
 public interface CartInfoMapper extends Mapper<CartInfo> {
 
-    /*¸ù¾İÓÃ»§id»ñÈ¡¹ºÎï³µÁĞ±í*/
+    /*ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½idï¿½ï¿½È¡ï¿½ï¿½ï¿½ï³µï¿½Ğ±ï¿½*/
     List<CartInfo> findCartByUserId(Long userId);
 
-    /*É¾³ıÄ³ÓÃ»§¹ºÎï³µÀïµÄÄ³¸öÉÌÆ·*/
+    /*É¾ï¿½ï¿½Ä³ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï³µï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½Æ·*/
     @Delete("delete from cart_info where userId = #{userId} and goodsId = #{goodsId}")
     int deleteGoods(@Param("userId") Long useId,@Param("goodsId") Long goodsId);
+
+    /*æ ¹æ®ç”¨æˆ·idåˆ é™¤ä»–çš„è´­ç‰©è½¦*/
+    @Delete("delete from cart_info where userId = #{userId}")
+    int deleteByUserId(@Param("userId") Long useId);
 }

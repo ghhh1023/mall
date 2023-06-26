@@ -104,4 +104,11 @@ public class UserInfoService {
     public UserInfo findById(int id){
         return userInfoMapper.findById(id);
     }
+
+    /**
+     * 根据id获取用户
+     */
+    public UserInfo findById(Long id){
+        return userInfoMapper.selectByPrimaryKey(id);
+    }
 }

@@ -75,4 +75,9 @@ public class CartInfoService {
     public void deleteGoods(Long useId,Long goodsId){
         cartInfoMapper.deleteGoods(useId, goodsId);
     }
+
+    /*Çå¿Õ¹ºÎï³µ*/
+    public void empty(Long userId){
+        cartInfoMapper.deleteByUserId(userId);
+    }
 }
