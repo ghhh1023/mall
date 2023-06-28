@@ -5,6 +5,8 @@ import com.gh.mall.entity.GoodsInfo;
 import com.gh.mall.mapper.GoodsInfoMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -84,5 +86,12 @@ public class GoodsInfoService {
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsInfo> list = goodsInfoMapper.findHotSalesGoods();
         return PageInfo.of(list);
+    }
+
+    /**
+     * 根据类型查询商品列表
+     */
+    public List<GoodsInfo> findByType(@Param("typeId") Integer typeId){
+        return goodsInfoMapper.findByType(typeId);
     }
 }

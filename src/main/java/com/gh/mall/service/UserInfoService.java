@@ -10,6 +10,7 @@ import com.gh.mall.mapper.UserInfoMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -110,5 +111,10 @@ public class UserInfoService {
      */
     public UserInfo findById(Long id){
         return userInfoMapper.selectByPrimaryKey(id);
+    }
+
+    /*用户总数*/
+    public Integer count(){
+        return userInfoMapper.count();
     }
 }

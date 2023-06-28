@@ -60,16 +60,30 @@ public class OrderInfoController {
      * 查询订单信息（分页）
      */
     @GetMapping("/page")
-    public Result<PageInfo<OrderInfo>> findFrontPages(@RequestParam(required = false) Long userId,
+    public Result<PageInfo<OrderInfo>> findPages(@RequestParam(required = false) Long userId,
                                                       @RequestParam(required = false,defaultValue = "1")Integer pageNum,
                                                       @RequestParam(required = false,defaultValue = "10")Integer pageSize,
                                                       HttpServletRequest request){
         return Result.success(orderInfoService.findPages(userId,pageNum,pageSize,request));
     }
 
+    /**
+     * 删除订单
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
         orderInfoService.delete(id);
         return Result.success();
+    }
+
+    /**
+     * 根据订单id查询所有商品
+     */
+    @GetMapping("/order/{id}")
+    public Result<OrderInfo> findById(@PathVariable Long id){
+        OrderInfo orderInfo = orderInfoService.findById(id);
+        return Result.success(orderInfo);
     }
 }

@@ -3,10 +3,13 @@ package com.gh.mall.controller;
 import com.gh.mall.common.Result;
 import com.gh.mall.entity.CartInfo;
 import com.gh.mall.entity.GoodsInfo;
+import com.gh.mall.entity.OrderInfo;
 import com.gh.mall.service.CartInfoService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,7 +25,7 @@ public class CartInfoController {
     /**
      * 添加购物车
      */
-    @PostMapping
+    @GetMapping
     public Result<CartInfo> add(@RequestBody CartInfo cartInfo){
         return Result.success(cartInfoService.add(cartInfo));
     }
@@ -30,7 +33,7 @@ public class CartInfoController {
     /**
      * 查询某用户的购物车（不分页）
      */
-    @GetMapping
+    @GetMapping("/findAll")
     public Result<List<GoodsInfo>> findAll(@RequestParam Long userId){
         return Result.success(cartInfoService.findAll(userId));
 
@@ -42,6 +45,25 @@ public class CartInfoController {
     @DeleteMapping("/goods/{userId}/{goodsId}")
     public Result deleteGoods(@PathVariable Long useId,@PathVariable Long goodsId){
         cartInfoService.deleteGoods(useId, goodsId);
+        return Result.success();
+    }
+
+    /**
+     * 查询购物车列表
+     */
+    @GetMapping("/page")
+    public Result<PageInfo<CartInfo>> findPages(@RequestParam(required = false,defaultValue = "1")Integer pageNum,
+                                                 @RequestParam(required = false,defaultValue = "10")Integer pageSize,
+                                                 HttpServletRequest request){
+        return Result.success(cartInfoService.findPageDetails(pageNum,pageSize,request));
+    }
+
+    /**
+     * 根据购物车id删除
+     */
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Long id){
+        cartInfoService.delete(id);
         return Result.success();
     }
 }

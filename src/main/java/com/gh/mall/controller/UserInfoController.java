@@ -59,4 +59,14 @@ public class UserInfoController {
         userInfoService.delete(id);
         return Result.success();
     }
+
+    /**
+     * 获取用户信息
+     */
+    @GetMapping("/{id}")
+    public Result<UserInfo> detail(@PathVariable Long id){
+        UserInfo userInfo = userInfoService.findById(id);
+        return Result.success(userInfo);
+    }
+
 }

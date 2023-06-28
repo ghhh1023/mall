@@ -13,6 +13,7 @@ import com.gh.mall.mapper.OrderGoodsRelMapper;
 import com.gh.mall.mapper.OrderInfoMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -189,5 +190,19 @@ public class OrderInfoService {
     public void delete(Long id) {
         orderInfoMapper.deleteById(id);
         orderGoodsRelMapper.deleteByOrderId(id);
+    }
+
+    /**
+     * 根据订单id查询所有商品
+     */
+    public OrderInfo findById(Long id) {
+        OrderInfo orderInfo = orderInfoMapper.selectByPrimaryKey(id);
+        packOrder(orderInfo);
+        return orderInfo;
+    }
+
+    /*总交易额*/
+    public Double totalPrice(){
+        return orderInfoMapper.totalPrice();
     }
 }

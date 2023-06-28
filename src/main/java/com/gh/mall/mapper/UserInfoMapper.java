@@ -2,6 +2,7 @@ package com.gh.mall.mapper;
 
 import com.gh.mall.entity.UserInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -14,4 +15,8 @@ public interface UserInfoMapper extends Mapper<UserInfo> {
     int checkRepeat(@Param("column")String column,@Param("value")String value);
 
     UserInfo findById(@Param("id") int id);
+
+    /*用户总数*/
+    @Select("select count(*) from user_info")
+    Integer count();
 }

@@ -2,6 +2,7 @@ package com.gh.mall.controller;
 
 import cn.hutool.core.util.StrUtil;
 
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gh.mall.common.Common;
@@ -146,5 +147,26 @@ public class AccountController {
             return Result.error("401","Î´µÇÂ¼");
         }
         return Result.success(user);
+    }
+
+    /**
+     * ÐÞ¸ÄÃÜÂë
+     */
+    @PutMapping("/updatePassword")
+    public Result updatePassword(@RequestBody Reset userInfo, HttpServletRequest request){
+        Object user1 = request.getSession().getAttribute(Common.USER_INFO);
+        if(user1 == null){
+            return Result.error("401","Î´µÇÂ¼");
+        }
+        UserInfo user = (UserInfo)user1;
+        String oldPassword = SecureUtil.md5(userInfo.getPassword());
+        if(!oldPassword.equals((user.getPassword()))){
+            return Result.error(ResultCode.USER_ACCOUNT_ERROR.code,ResultCode.USER_ACCOUNT_ERROR.msg);
+        }
+        user.setPassword(SecureUtil.md5(userInfo.getNewPassword()));
+        userInfoService.update(user);
+        //Çå¿Õsession£¬ÈÃÓÃ»§ÖØÐÂµÇÂ½
+        request.getSession().setAttribute(Common.USER_INFO,null);
+        return Result.success();
     }
 }

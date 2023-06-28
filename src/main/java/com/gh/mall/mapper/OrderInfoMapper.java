@@ -29,4 +29,8 @@ public interface OrderInfoMapper extends Mapper<OrderInfo> {
 
     /*删除订单*/
     void deleteById(Long id);
+
+    /*总交易额*/
+    @Select("select sum(totalPrice) from order_info where state = '完成'")
+    Double totalPrice();
 }

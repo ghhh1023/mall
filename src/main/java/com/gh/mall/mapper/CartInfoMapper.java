@@ -21,4 +21,8 @@ public interface CartInfoMapper extends Mapper<CartInfo> {
     /*根据用户id删除他的购物车*/
     @Delete("delete from cart_info where userId = #{userId}")
     int deleteByUserId(@Param("userId") Long useId);
+
+    /*查询所有人的购物车列表*/
+    List<CartInfo> findAll();
+
 }

@@ -3,9 +3,14 @@ package com.gh.mall.service;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import com.gh.mall.common.Common;
 import com.gh.mall.entity.CartInfo;
 import com.gh.mall.entity.GoodsInfo;
+import com.gh.mall.entity.UserInfo;
+import com.gh.mall.exception.CustomException;
 import com.gh.mall.mapper.CartInfoMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -14,6 +19,7 @@ import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,5 +85,29 @@ public class CartInfoService {
     /*清空购物车*/
     public void empty(Long userId){
         cartInfoMapper.deleteByUserId(userId);
+    }
+
+    /*翻页查询购物车列表*/
+    public PageInfo<CartInfo> findPageDetails(Integer pageNum, Integer pageSize, HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute(Common.USER_INFO);
+        if(user == null){
+            throw new CustomException("1001","seesion已失效,请重新失效");
+        }
+        Integer level = user.getLevel();
+        PageHelper.startPage(pageNum,pageSize);
+        List<CartInfo> list;
+        if(level == 1){
+            list = cartInfoMapper.findAll();
+        }else {
+            list = cartInfoMapper.findCartByUserId(user.getId());
+        }
+        return PageInfo.of(list);
+    }
+
+    /**
+     * 根据购物车id删除
+     */
+    public void delete(Long id) {
+        cartInfoMapper.deleteByPrimaryKey(id);
     }
 }

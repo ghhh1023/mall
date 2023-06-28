@@ -4,9 +4,11 @@ import com.gh.mall.common.Result;
 import com.gh.mall.entity.GoodsInfo;
 import com.gh.mall.service.GoodsInfoService;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/goodsInfo")
@@ -89,5 +91,13 @@ public class GoodsInfoController {
     public Result<PageInfo<GoodsInfo>> findHotSalesGoods(@RequestParam(defaultValue = "1") Integer pageNum,
                                                           @RequestParam(defaultValue = "10") Integer pageSize){
         return Result.success(goodsInfoService.findHotSalesGoods(pageNum,pageSize));
+    }
+
+    /**
+     * 根据类型查询商品列表
+     */
+    @GetMapping("/findByType/{typeId}")
+    public Result<List<GoodsInfo>> findByType(@PathVariable Integer typeId){
+        return Result.success(goodsInfoService.findByType(typeId));
     }
 }
