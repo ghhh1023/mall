@@ -25,7 +25,7 @@ public class CartInfoController {
     /**
      * 添加购物车
      */
-    @GetMapping
+    @PutMapping
     public Result<CartInfo> add(@RequestBody CartInfo cartInfo){
         return Result.success(cartInfoService.add(cartInfo));
     }
@@ -43,8 +43,8 @@ public class CartInfoController {
      * 删除某用户购物车里的某个商品
      */
     @DeleteMapping("/goods/{userId}/{goodsId}")
-    public Result deleteGoods(@PathVariable Long useId,@PathVariable Long goodsId){
-        cartInfoService.deleteGoods(useId, goodsId);
+    public Result deleteGoods(@PathVariable Long userId,@PathVariable Long goodsId){
+        cartInfoService.deleteGoods(userId, goodsId);
         return Result.success();
     }
 
